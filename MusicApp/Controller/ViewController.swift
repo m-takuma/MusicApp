@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  MusicApp
-//
-//  Created by 松尾卓磨 on 2020/09/28.
-//  Copyright © 2020 松尾卓磨. All rights reserved.
-//
-
 import UIKit
 import youtube_ios_player_helper
 import Foundation
@@ -13,10 +5,10 @@ import Alamofire
 import SwiftyJSON
 
 class ViewController: UIViewController, YTPlayerViewDelegate,UITextFieldDelegate,CatchVideoID{
-    let searchmodel = SearchModel()
-    var videotitleArray = [String()]
-    var videoImageArray = [String()]
-    var videoIdArray = [String()]
+    
+    
+    let searchModel = SearchModel()
+    var alert:UIAlertController!
     
     @IBOutlet weak var youtubeview: YTPlayerView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -44,20 +36,22 @@ class ViewController: UIViewController, YTPlayerViewDelegate,UITextFieldDelegate
 
     @IBAction func PushedSearchButton(_ sender: UIButton) {
         view.endEditing(true)
-        let encodedUrl = searchmodel.makeSearchUrl(word: searchTextField.text!)
+        let encodedUrl = searchModel.makeSearchUrl(word: searchTextField.text!)
+        
         AF.request(encodedUrl,method: .get,parameters: nil,encoding: JSONEncoding.default).responseJSON { (res) in
             switch res.result{
             case .success:
                 let json:JSON = JSON(res.data as Any)
-                print(json)
-                self.searchmodel.StartParse(json: json)
-                self.videotitleArray = self.searchmodel.titleArray
-                self.videoImageArray = self.searchmodel.videoImageArray
-                self.videoIdArray = self.searchmodel.videoIDArray
-                print(self.videoIdArray)
-                self.performSegue(withIdentifier: "id", sender: nil)
+                let trueOrFalse = self.searchModel.StartParse(json: json)
+                if trueOrFalse {
+                    self.performSegue(withIdentifier: "id", sender: nil)
+                }else{
+                    print("json解析でエラーが発生しました")
+                    self.makeAlertViewForErrorCode(code: self.searchModel.errorCode)
+                    self.present(self.alert, animated: true, completion: nil)
+                }
             case .failure(_):
-                print("エラー")
+                print("json取得に失敗しました")
             }
         }
     }
@@ -65,13 +59,24 @@ class ViewController: UIViewController, YTPlayerViewDelegate,UITextFieldDelegate
         if segue.identifier == "id"{
             let tableVC = segue.destination as! SearchResultsViewController
             tableVC.delegate = self
-            tableVC.videotitleArray = self.videotitleArray
-            tableVC.videoImageArray = self.videoImageArray
-            tableVC.videoIdArray = self.videoIdArray
+            tableVC.videotitleArray = searchModel.titleArray
+            tableVC.videoImageArray = searchModel.videoImageArray
+            tableVC.videoIdArray = searchModel.videoIDArray
+            tableVC.searchWord = searchModel.word
+            tableVC.nextPageToken = searchModel.nextPageToken
+            tableVC.prevPageToken = searchModel.prevPageToken
         }
     }
     func CatchVideoIdAndPlayVideo(Id: String) {
         self.youtubeview.load(withVideoId: Id, playerVars: ["playsinline":1])
+    }
+    func makeAlertViewForErrorCode(code:Int){
+        alert = UIAlertController.init(title: "エラー", message: "code:\(code)", preferredStyle: UIAlertController.Style.alert)
+        let alertAction = UIAlertAction(
+                    title: "OK",
+            style: UIAlertAction.Style.cancel,
+                    handler: nil)
+        alert.addAction(alertAction)
     }
 }
 

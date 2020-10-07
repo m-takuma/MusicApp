@@ -106,11 +106,19 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFL-zd-oCO">
-                                <rect key="frame" x="313" y="11" width="46" height="30"/>
+                                <rect key="frame" x="320" y="11" width="32" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Next"/>
                                 <connections>
                                     <action selector="nextButtonPushed:" destination="tiz-an-snk" eventType="touchUpInside" id="Han-xd-Lw5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ag5-2l-T2b">
+                                <rect key="frame" x="24" y="11" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Prev"/>
+                                <connections>
+                                    <action selector="prevButtonPushed:" destination="tiz-an-snk" eventType="touchUpInside" id="Chn-KI-kUe"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -118,6 +126,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="NextButton" destination="zFL-zd-oCO" id="JSE-ty-sTs"/>
+                        <outlet property="PrevButton" destination="ag5-2l-T2b" id="cHI-xY-vbi"/>
                         <outlet property="searchResultsTabelView" destination="3WA-al-8Eq" id="xtu-to-H50"/>
                     </connections>
                 </viewController>

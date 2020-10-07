@@ -1,11 +1,3 @@
-//
-//  TableViewCell.swift
-//  MusicApp
-//
-//  Created by 松尾卓磨 on 2020/10/03.
-//  Copyright © 2020 松尾卓磨. All rights reserved.
-//
-
 import UIKit
 
 class TableViewCell: UITableViewCell {
