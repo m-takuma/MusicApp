@@ -28,6 +28,7 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         super.viewDidLoad()
         searchResultsTabelView.delegate = self
         searchResultsTabelView.dataSource = self
+        searchResultsTabelView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

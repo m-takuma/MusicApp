@@ -1,10 +1,13 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
-
+    
+    
     @IBOutlet weak var videoImage: UIImageView!
     
     @IBOutlet weak var videoTitle: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
