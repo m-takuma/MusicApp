@@ -30,7 +30,10 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
         searchResultsTabelView.dataSource = self
         searchResultsTabelView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
     }
-    
+        
+    override func viewDidDisappear(_ animated: Bool) {
+        //delegate?.CatchVideoIdAndPlayVideo(Id: "")
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if nextPageToken == "" {
             NextButton.isHidden = true
