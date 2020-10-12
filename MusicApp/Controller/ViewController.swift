@@ -25,10 +25,12 @@ class ViewController: UIViewController, YTPlayerViewDelegate,UITextFieldDelegate
     
     override func viewWillLayoutSubviews() {
         let keyWindow = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive}).map({$0 as? UIWindowScene}).compactMap({$0}).first?.windows.filter({$0.isKeyWindow}).first
-        let x = keyWindow!.subviews.filter{$0.tag == 100}
-        if x == [] && a == 1{
-            youtubeview.frame = CGRect(x: 0, y: 102, width: 375, height: 516)
-            keyWindow?.addSubview(self.youtubeview)
+        if keyWindow != nil {
+            let x = keyWindow!.subviews.filter{$0.tag == 100}
+            if x == [] && a == 1{
+                youtubeview.frame = CGRect(x: 0, y: 102, width: 375, height: 516)
+                keyWindow?.addSubview(self.youtubeview)
+            }
         }
     }
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {//動画再生の準備ができたときの処理
@@ -67,9 +69,6 @@ class ViewController: UIViewController, YTPlayerViewDelegate,UITextFieldDelegate
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "id"{
-            let keyWindow = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive}).map({$0 as? UIWindowScene}).compactMap({$0}).first?.windows.filter({$0.isKeyWindow}).first
-            let x = keyWindow!.subviews.filter{$0.tag == 100}
-            self.view.addSubview(x[0])
             a = 2
             let tableVC = segue.destination as! SearchResultsViewController
             tableVC.delegate = self
@@ -82,11 +81,7 @@ class ViewController: UIViewController, YTPlayerViewDelegate,UITextFieldDelegate
         }
     }
     func CatchVideoIdAndPlayVideo(Id: String) {
-        let keyWindow = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive}).map({$0 as? UIWindowScene}).compactMap({$0}).first?.windows.filter({$0.isKeyWindow}).first
-        let tempView = keyWindow?.viewWithTag(100)
         youtubeview.load(withVideoId: Id, playerVars: ["playsinline":1])
-        youtubeview.frame = CGRect(x: 0, y: 102, width: 375, height: 516)
-        keyWindow?.addSubview(self.youtubeview)
     }
     func makeAlertViewForErrorCode(code:Int){
         alert = UIAlertController.init(title: "エラー", message: "code:\(code)", preferredStyle: UIAlertController.Style.alert)
