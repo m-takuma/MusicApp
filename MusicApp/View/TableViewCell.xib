@@ -20,21 +20,29 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1f-s6-iG3">
-                    <rect key="frame" x="86" y="1" width="273" height="40"/>
+                    <rect key="frame" x="86" y="2" width="237" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZQ-3f-ldd">
+                    <rect key="frame" x="331" y="0.0" width="44" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="playlistButtonPushed:" destination="iN0-l3-epB" eventType="touchUpInside" id="ydi-iW-rgm"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="playlistButton" destination="TZQ-3f-ldd" id="j03-90-f6q"/>
                 <outlet property="videoImage" destination="TAy-RM-WGt" id="phv-s8-jMd"/>
                 <outlet property="videoTitle" destination="h1f-s6-iG3" id="H82-6k-Q7g"/>
             </connections>
-            <point key="canvasLocation" x="-157" y="63"/>
+            <point key="canvasLocation" x="-157.59999999999999" y="62.968515742128943"/>
         </view>
     </objects>
     <resources>

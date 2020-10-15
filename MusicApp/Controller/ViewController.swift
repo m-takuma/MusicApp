@@ -14,13 +14,19 @@ class ViewController: UIViewController, YTPlayerViewDelegate,UITextFieldDelegate
     @IBOutlet weak var youtubeview: YTPlayerView!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         youtubeview.tag = 100
         self.youtubeview.delegate = self
         searchTextField.delegate = self//画面読み込み時のところに書く
-        self.youtubeview.load(withVideoId: "_RmyFTG0F_c", playerVars: ["playsinline":1])
-        // Do any additional setup after loading the view.
+        if UserDefaults.standard.stringArray(forKey: "key") != []{
+            var playlist:Array<String>! = UserDefaults.standard.stringArray(forKey: "key")
+            playlist.shuffle()
+            self.youtubeview.load(withVideoId: playlist[0], playerVars: ["playsinline":1])
+        }else{
+            self.youtubeview.load(withVideoId: "_RmyFTG0F_c", playerVars: ["playsinline":1])
+        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -28,19 +34,21 @@ class ViewController: UIViewController, YTPlayerViewDelegate,UITextFieldDelegate
         if keyWindow != nil {
             let x = keyWindow!.subviews.filter{$0.tag == 100}
             if x == [] && a == 1{
-                youtubeview.frame = CGRect(x: 0, y: 102, width: 375, height: 516)
+                youtubeview.frame = CGRect(x: 0, y: 407, width: 375, height: 211)
                 keyWindow?.addSubview(self.youtubeview)
             }
         }
     }
+    
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {//動画再生の準備ができたときの処理
         self.youtubeview.playVideo()
+        
     }
-
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //searchmodel.search(word: textField.text!)
         return textField.resignFirstResponder()
@@ -67,6 +75,7 @@ class ViewController: UIViewController, YTPlayerViewDelegate,UITextFieldDelegate
             }
         }
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "id"{
             a = 2
@@ -80,9 +89,19 @@ class ViewController: UIViewController, YTPlayerViewDelegate,UITextFieldDelegate
             tableVC.prevPageToken = searchModel.prevPageToken
         }
     }
+    
     func CatchVideoIdAndPlayVideo(Id: String) {
-        youtubeview.load(withVideoId: Id, playerVars: ["playsinline":1])
+        let keyWindow = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive}).map({$0 as? UIWindowScene}).compactMap({$0}).first?.windows.filter({$0.isKeyWindow}).first
+        if keyWindow != nil {
+            let x = keyWindow!.subviews.filter{$0.tag == 100}
+            if x != [] {
+                //self.view.addSubview(x[0])
+                let tempView = x[0] as! YTPlayerView
+                tempView.load(withVideoId: Id, playerVars: ["playsinline":1])
+            }
+        }
     }
+    
     func makeAlertViewForErrorCode(code:Int){
         alert = UIAlertController.init(title: "エラー", message: "code:\(code)", preferredStyle: UIAlertController.Style.alert)
         let alertAction = UIAlertAction(

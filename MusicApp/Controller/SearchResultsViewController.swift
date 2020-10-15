@@ -51,9 +51,16 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let Cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
+        Cell.delegate = self
         Cell.videoImage.sd_setImage(with: URL(string: videoImageArray[indexPath.row]), completed: nil)
         Cell.videoTitle.text = videotitleArray[indexPath.row]
-        
+        Cell.playlistButton.tag = indexPath.row
+        let plusOrDelete = Cell.playlistModel.searchMusic(id: videoIdArray[indexPath.row])
+        if plusOrDelete {//true -> playlistにある　false -> playlistにない
+            Cell.playlistButton.setImage(UIImage(systemName: "delete.left"), for: .normal)
+        }else{
+            Cell.playlistButton.setImage(UIImage(systemName: "plus"), for: .normal)
+        }
         return Cell
     }
     
@@ -100,4 +107,16 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
             }
         }
     }
+}
+
+extension SearchResultsViewController:CatchVideoInfoDelegate{
+    func catchVideoInfo(at: Int) -> (id:String,title:String,image:String) {
+        let id = self.videoIdArray[at]
+        let title = self.videotitleArray[at]
+        let image = self.videoImageArray[at]
+        let videoInfo = (id:id,title:title,image:image)
+        return videoInfo
+    }
+    
+    
 }
