@@ -1,3 +1,10 @@
+//
+//  SearchResultsViewController.swift
+//  MusicApp
+//
+//  Created by 松尾卓磨 on 2020/10/21.
+//  Copyright © 2020 松尾卓磨. All rights reserved.
+//
 import UIKit
 import Alamofire
 import SwiftyJSON
@@ -8,7 +15,7 @@ protocol CatchVideoID {
 class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
     
     
-    let searchModel = SearchModel()
+    private let searchModel = SearchModel()
     var videotitleArray = [String()]
     var videoImageArray = [String()]
     var videoIdArray = [String()]

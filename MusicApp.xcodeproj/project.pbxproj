@@ -20,6 +20,7 @@
 		68B125F125221AE900274A1E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68B125EF25221AE900274A1E /* Main.storyboard */; };
 		68B125F325221AF600274A1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68B125F225221AF600274A1E /* Assets.xcassets */; };
 		68B125F625221AF600274A1E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68B125F425221AF600274A1E /* LaunchScreen.storyboard */; };
+		68B6F3B82540004500C1CAB3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B6F3B72540004500C1CAB3 /* SettingsViewController.swift */; };
 		68B786C82532AF8C00C8292D /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68B786C72532AF8C00C8292D /* TableViewCell.xib */; };
 		68E3ABB32526E26800793754 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E3ABB22526E26800793754 /* SearchResultsViewController.swift */; };
 		9DE65E8DB97CBF11EA755274 /* Pods_MusicApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AE99E002B3A8C050033417 /* Pods_MusicApp.framework */; };
@@ -42,6 +43,7 @@
 		68B125F225221AF600274A1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68B125F525221AF600274A1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68B125F725221AF600274A1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68B6F3B72540004500C1CAB3 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		68B786C72532AF8C00C8292D /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		68E3ABB22526E26800793754 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		7FE41013075FC320D760789B /* Pods-MusicApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicApp.release.xcconfig"; path = "Target Support Files/Pods-MusicApp/Pods-MusicApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				6895FE8E25379F8200E4B5BB /* TabControllerViewController.swift */,
 				6895FE912537AA6C00E4B5BB /* PlaylistViewController.swift */,
 				6895FE942537AA7D00E4B5BB /* HistoryViewController.swift */,
+				68B6F3B72540004500C1CAB3 /* SettingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				6811C7D02522D6F9007BB6B1 /* SearchModel.swift in Sources */,
 				68E3ABB32526E26800793754 /* SearchResultsViewController.swift in Sources */,
 				68161DC7252C2F8A00F71597 /* SecretFile.swift in Sources */,
+				68B6F3B82540004500C1CAB3 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

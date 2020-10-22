@@ -1,3 +1,10 @@
+//
+//  TableViewCell.swift
+//  MusicApp
+//
+//  Created by 松尾卓磨 on 2020/10/21.
+//  Copyright © 2020 松尾卓磨. All rights reserved.
+//
 import UIKit
 
 protocol CatchVideoInfoDelegate {

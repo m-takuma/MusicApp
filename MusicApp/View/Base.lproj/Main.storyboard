@@ -80,6 +80,42 @@
             </objects>
             <point key="canvasLocation" x="855.20000000000005" y="381.85907046476763"/>
         </scene>
+        <!--Setting-->
+        <scene sceneID="oAZ-w1-dOJ">
+            <objects>
+                <viewController id="2Xb-K1-LJA" customClass="SettingsViewController" customModule="MusicApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VR3-aW-6gp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LN2-be-fG1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="407"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingCell" id="KkZ-q5-jcN">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KkZ-q5-jcN" id="Nyp-FG-REN">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Jju-Dm-nd7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Setting" image="gearshape" catalog="system" id="ckG-ln-Ejg"/>
+                    <connections>
+                        <outlet property="settingTableview" destination="LN2-be-fG1" id="l5v-ZC-zqv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7dh-Ut-NkX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1876" y="381.85907046476763"/>
+        </scene>
         <!--Search Results View Controller-->
         <scene sceneID="UcH-bX-Avt">
             <objects>
@@ -138,6 +174,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="dZf-pD-IeI"/>
                         <segue destination="FDa-dw-DUk" kind="relationship" relationship="viewControllers" id="VgC-wd-V6q"/>
                         <segue destination="tGW-3B-d4M" kind="relationship" relationship="viewControllers" id="2qz-C0-JkL"/>
+                        <segue destination="2Xb-K1-LJA" kind="relationship" relationship="viewControllers" id="E8S-56-mAG"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Z5-02-mo1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -169,6 +206,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="music.note" catalog="system" width="97" height="128"/>

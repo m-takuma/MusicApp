@@ -1,13 +1,20 @@
+//
+//  SearchModel.swift
+//  MusicApp
+//
+//  Created by 松尾卓磨 on 2020/10/21.
+//  Copyright © 2020 松尾卓磨. All rights reserved.
+//
 import Foundation
 import Alamofire
 import SwiftyJSON
 
 class SearchModel{
     
-    let secret = Secret()
+    private let secret = Secret()
     
-    var apiKey = String()
-    var resultCount = Int()
+    private var apiKey = String()
+    private var resultCount = Int()
     var videoIDArray = [String()]
     var titleArray = [String()]
     var videoImageArray = [String()]
@@ -27,26 +34,35 @@ class SearchModel{
         self.videoImageArray = []
     }
     
+    /*YouTubeDataApiでワード検索するメソッド*/
+    
     func makeSearchUrl(word:String,resultCount:Int) -> String {
         self.word = word
-        let url = "https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&q=\(word)&part=snippet&fields=items(id,snippet/title,snippet/thumbnails/default),pageInfo/resultsPerPage&maxResults=\(resultCount)"
+        let type = "video"
+        let url = "https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&q=\(word)&part=snippet&fields=items(id,snippet/title,snippet/thumbnails/default),pageInfo/resultsPerPage&maxResults=\(resultCount)&type=\(type)"
         let encodedUrl:String = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         return encodedUrl
     }
     func makeSearchUrl(word:String,pageToken:String) -> String {
         self.word = word
-        let url = "https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&q=\(word)&part=snippet&fields=items(id,snippet/title,snippet/thumbnails/default),pageInfo/resultsPerPage,nextPageToken,prevPageToken&maxResults=\(resultCount)&pageToken=\(pageToken)"
+        let type = "video"
+        let url = "https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&q=\(word)&part=snippet&fields=items(id,snippet/title,snippet/thumbnails/default),pageInfo/resultsPerPage&maxResults=\(resultCount)&type=\(type)"
         let encodedUrl:String = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         return encodedUrl
     }
     func makeSearchUrl(word:String) -> String {
         self.word = word
-        let url = "https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&q=\(word)&part=snippet&fields=items(id,snippet/title,snippet/thumbnails/default),pageInfo/resultsPerPage,nextPageToken,prevPageToken&maxResults=\(resultCount)"
+        let type = "video"
+        let url = "https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&q=\(word)&part=snippet&fields=items(id,snippet/title,snippet/thumbnails/default),pageInfo/resultsPerPage&maxResults=\(resultCount)&type=\(type)"
+        print(url)
         let encodedUrl:String = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         return encodedUrl
     }
     
-    
+    /*makeSearchUrl()から得られたurlにアクセスして得られるjsonを解析するメソッド
+     返り値は正しく解析できたかどうか
+     YouTubeDataApi用
+     */
     func StartParse(json:JSON) -> Bool {
         print(json)
         guard let resultCount:Int = json["pageInfo"]["resultsPerPage"].int else{
@@ -83,7 +99,11 @@ class SearchModel{
         }
         return true
     }
-    func reset() -> Void {
+    
+    /*YouTubeDataApi用の格納配列のリセットメソッド
+     
+     */
+    private func reset() -> Void {
         titleArray = []
         videoImageArray = []
         videoIDArray = []

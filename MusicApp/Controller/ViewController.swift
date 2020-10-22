@@ -1,3 +1,10 @@
+//
+//  ViewController.swift
+//  MusicApp
+//
+//  Created by 松尾卓磨 on 2020/10/21.
+//  Copyright © 2020 松尾卓磨. All rights reserved.
+//
 import UIKit
 import youtube_ios_player_helper
 import Foundation
@@ -7,9 +14,8 @@ import SwiftyJSON
 class ViewController: UIViewController, YTPlayerViewDelegate,UITextFieldDelegate,CatchVideoID{
     
     
-    let searchModel = SearchModel()
-    var alert:UIAlertController!
-    var a = 1
+    private let searchModel = SearchModel()
+    private var alert:UIAlertController!
     
     @IBOutlet weak var youtubeview: YTPlayerView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -19,7 +25,7 @@ class ViewController: UIViewController, YTPlayerViewDelegate,UITextFieldDelegate
         super.viewDidLoad()
         youtubeview.tag = 100
         self.youtubeview.delegate = self
-        searchTextField.delegate = self//画面読み込み時のところに書く
+        searchTextField.delegate = self
         if UserDefaults.standard.stringArray(forKey: "key") != []{
             var playlist:Array<String>! = UserDefaults.standard.stringArray(forKey: "key")
             playlist.shuffle()
@@ -33,7 +39,7 @@ class ViewController: UIViewController, YTPlayerViewDelegate,UITextFieldDelegate
         let keyWindow = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive}).map({$0 as? UIWindowScene}).compactMap({$0}).first?.windows.filter({$0.isKeyWindow}).first
         if keyWindow != nil {
             let x = keyWindow!.subviews.filter{$0.tag == 100}
-            if x == [] && a == 1{
+            if x == [] {
                 youtubeview.frame = CGRect(x: 0, y: 407, width: 375, height: 211)
                 keyWindow?.addSubview(self.youtubeview)
             }
@@ -41,8 +47,7 @@ class ViewController: UIViewController, YTPlayerViewDelegate,UITextFieldDelegate
     }
     
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {//動画再生の準備ができたときの処理
-        self.youtubeview.playVideo()
-        
+        playerView.playVideo()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -50,7 +55,6 @@ class ViewController: UIViewController, YTPlayerViewDelegate,UITextFieldDelegate
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //searchmodel.search(word: textField.text!)
         return textField.resignFirstResponder()
     }
 
@@ -78,7 +82,6 @@ class ViewController: UIViewController, YTPlayerViewDelegate,UITextFieldDelegate
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "id"{
-            a = 2
             let tableVC = segue.destination as! SearchResultsViewController
             tableVC.delegate = self
             tableVC.videotitleArray = searchModel.titleArray
@@ -95,14 +98,23 @@ class ViewController: UIViewController, YTPlayerViewDelegate,UITextFieldDelegate
         if keyWindow != nil {
             let x = keyWindow!.subviews.filter{$0.tag == 100}
             if x != [] {
-                //self.view.addSubview(x[0])
                 let tempView = x[0] as! YTPlayerView
                 tempView.load(withVideoId: Id, playerVars: ["playsinline":1])
+                
+                
             }
         }
     }
     
-    func makeAlertViewForErrorCode(code:Int){
+    func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
+        if state == .ended{//1曲ループ再生
+            if UserDefaults.standard.object(forKey: "loop") as? Bool == true{
+                playerView.playVideo()
+            }
+        }
+    }
+    
+    private func makeAlertViewForErrorCode(code:Int){
         alert = UIAlertController.init(title: "エラー", message: "code:\(code)", preferredStyle: UIAlertController.Style.alert)
         let alertAction = UIAlertAction(
                     title: "OK",

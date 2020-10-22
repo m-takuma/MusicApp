@@ -30,7 +30,7 @@ class PlaylistViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let musicIdKeyArray = UserDefaults.standard.stringArray(forKey: playlistModel.key) else {
+        guard let musicIdKeyArray = UserDefaults.standard.stringArray(forKey: playlistModel.KEY) else {
             return 0
         }
         videoIdArray = []
