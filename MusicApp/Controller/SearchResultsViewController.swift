@@ -99,7 +99,6 @@ class SearchResultsViewController: UIViewController,UITableViewDelegate,UITableV
                 let trueOrFalse = self.searchModel.StartParse(json: json)
                 if trueOrFalse {
                     self.videotitleArray = self.searchModel.titleArray
-                    print(self.videotitleArray)
                     self.videoImageArray = self.searchModel.videoImageArray
                     self.videoIdArray = self.searchModel.videoIDArray
                     self.searchWord = self.searchModel.word

@@ -28,7 +28,6 @@ class PlaylistModel {
     func addMusicToPlaylist(id:String,title:String,image:String) -> Void {
         musicIdKeyArray = UserDefaults.standard.stringArray(forKey: KEY)!
         musicIdKeyArray.append(id)
-        print(musicIdKeyArray)
         UserDefaults.standard.setValue(musicIdKeyArray, forKey: KEY)
         let musicInfo = ["id":id,"title":title,"image":image]
         UserDefaults.standard.setValue(musicInfo, forKey: id)

@@ -39,7 +39,6 @@ class PlaylistViewController: UIViewController,UITableViewDelegate,UITableViewDa
         for i in 0 ..< musicIdKeyArray.count {
             let idKey = musicIdKeyArray[i]
             let videoInfo = UserDefaults.standard.dictionary(forKey: idKey)
-            print(videoInfo!)
             videoIdArray.append(videoInfo!["id"] as! String)
             videotitleArray.append(videoInfo!["title"] as! String)
             videoImageArray.append(videoInfo!["image"] as! String)
@@ -73,7 +72,6 @@ class PlaylistViewController: UIViewController,UITableViewDelegate,UITableViewDa
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let PlaylistVC = storyboard.instantiateViewController(withIdentifier: "playVC") as! ViewController
         let delegate:ViewController? = PlaylistVC
-        print(id)
         delegate?.CatchVideoIdAndPlayVideo(Id: id)
     }
 }

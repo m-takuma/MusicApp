@@ -39,22 +39,21 @@ class SearchModel{
     func makeSearchUrl(word:String,resultCount:Int) -> String {
         self.word = word
         let type = "video"
-        let url = "https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&q=\(word)&part=snippet&fields=items(id,snippet/title,snippet/thumbnails/default),pageInfo/resultsPerPage&maxResults=\(resultCount)&type=\(type)"
+        let url = "https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&q=\(word)&part=snippet&fields=items(id,snippet/title,snippet/thumbnails/default),pageInfo/resultsPerPage,nextPageToken,prevPageToken&maxResults=\(resultCount)&type=\(type)"
         let encodedUrl:String = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         return encodedUrl
     }
     func makeSearchUrl(word:String,pageToken:String) -> String {
         self.word = word
         let type = "video"
-        let url = "https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&q=\(word)&part=snippet&fields=items(id,snippet/title,snippet/thumbnails/default),pageInfo/resultsPerPage&maxResults=\(resultCount)&type=\(type)"
+        let url = "https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&q=\(word)&part=snippet&fields=items(id,snippet/title,snippet/thumbnails/default),pageInfo/resultsPerPage,nextPageToken,prevPageToken&maxResults=\(resultCount)&type=\(type)&pageToken=\(pageToken)"
         let encodedUrl:String = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         return encodedUrl
     }
     func makeSearchUrl(word:String) -> String {
         self.word = word
         let type = "video"
-        let url = "https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&q=\(word)&part=snippet&fields=items(id,snippet/title,snippet/thumbnails/default),pageInfo/resultsPerPage&maxResults=\(resultCount)&type=\(type)"
-        print(url)
+        let url = "https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&q=\(word)&part=snippet&fields=items(id,snippet/title,snippet/thumbnails/default),pageInfo/resultsPerPage,nextPageToken,prevPageToken&maxResults=\(resultCount)&type=\(type)"
         let encodedUrl:String = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         return encodedUrl
     }
@@ -64,7 +63,6 @@ class SearchModel{
      YouTubeDataApi用
      */
     func StartParse(json:JSON) -> Bool {
-        print(json)
         guard let resultCount:Int = json["pageInfo"]["resultsPerPage"].int else{
             errorCode = json["error"]["code"].int!
             return false
